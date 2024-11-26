@@ -40,7 +40,14 @@ export default {
             defaultValue: '',
             bindable: true,
         },
-
+        toggleAccordion: {
+            type: 'Button',
+            editorOnly: true,
+            options: {
+                text: { en: 'Toggle accordion' },
+                action: 'toggleAccordion',
+            },
+        },
         disabled: {
             label: {
                 en: 'Disabled',
