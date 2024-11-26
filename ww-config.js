@@ -67,7 +67,7 @@ export default {
                 isWwObject: true,
                 type: 'd679aeee-613b-4f0f-9a1d-cd3d865cdc56',
                 state: {
-                    name: 'Accordion Item',
+                    name: 'Accordion Trigger',
                 },
             },
         },
