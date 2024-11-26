@@ -1,8 +1,8 @@
 export default {
-    inherit: 'ww-text',
+    inherit: 'ww-layout',
     options: {
         autoByContent: true,
-        displayAllowedValues: ['flex', 'inline-flex'],
+        displayAllowedValues: ['flex', 'inline-flex', 'grid'],
         linkable: true,
     },
     editor: {
@@ -11,12 +11,6 @@ export default {
             fr: "Item d'accordéon",
         },
         icon: 'ww-accordion-item',
-        infoTags: () => {
-            return [];
-        },
-        workflowHints: () => {
-            return false;
-        },
     },
     states: ['focus', 'disabled'],
     triggerEvents: [
@@ -31,7 +25,6 @@ export default {
             },
         },
     ],
-    actions: [],
     properties: {
         value: {
             label: {
@@ -45,6 +38,7 @@ export default {
                 fr: "La valeur de l'accordéon",
             },
             defaultValue: '',
+            bindable: true,
         },
 
         disabled: {
@@ -59,6 +53,7 @@ export default {
                 fr: "Désactive l'accordéon",
             },
             defaultValue: false,
+            bindable: true,
         },
 
         triggerElement: {
