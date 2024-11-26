@@ -52,8 +52,6 @@ export default {
         }
         function toggleAccordion() {
             const newValue = value.value === props.content.value ? null : props.content.value;
-            const { log } = console;
-            log('toggleAccordion', newValue, props.content.value);
             value.value = newValue;
         }
 
