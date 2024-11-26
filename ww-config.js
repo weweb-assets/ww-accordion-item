@@ -65,7 +65,7 @@ export default {
             hidden: true,
             defaultValue: {
                 isWwObject: true,
-                type: 'd2aaec84-09a5-495f-833e-88b1308237a8',
+                type: 'd679aeee-613b-4f0f-9a1d-cd3d865cdc56',
                 state: {
                     name: 'Accordion Item',
                 },
