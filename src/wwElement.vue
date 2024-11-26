@@ -63,7 +63,7 @@ export default {
             isExpanded,
         });
 
-        wwLib.wwElement.useRegisterElementLocalContext('ww-accordion-item', ref({ isExpanded }))
+        wwLib.wwElement.useRegisterElementLocalContext('ww-accordion-item', { isExpanded })
 
         return {
             isExpanded,
