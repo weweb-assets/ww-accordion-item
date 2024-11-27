@@ -44,15 +44,20 @@ export default {
             });
         });
 
+        const {
+            openAccordion: parentOpenAccordion,
+            closeAccordion: parentCloseAccordion,
+            toggleAccordion: parentToggleAccordion,
+        } = inject('weweb-assets/ww-accordion-root');
+
         function openAccordion() {
-            value.value = props.content.value;
+            parentOpenAccordion(props.content.value);
         }
         function closeAccordion() {
-            value.value = null;
+            parentCloseAccordion(props.content.value);
         }
         function toggleAccordion() {
-            const newValue = value.value === props.content.value ? null : props.content.value;
-            value.value = newValue;
+            parentToggleAccordion(props.content.value);
         }
 
         provide('weweb-assets/ww-accordion-item', {
@@ -63,7 +68,7 @@ export default {
             isExpanded,
         });
 
-        wwLib.wwElement.useRegisterElementLocalContext('ww-accordion-item', { isExpanded })
+        wwLib.wwElement.useRegisterElementLocalContext('ww-accordion-item', { isExpanded });
 
         return {
             isExpanded,
