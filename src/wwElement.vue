@@ -44,12 +44,6 @@ export default {
             });
         });
 
-        const {
-            openAccordion: parentOpenAccordion,
-            closeAccordion: parentCloseAccordion,
-            toggleAccordion: parentToggleAccordion,
-        } = inject('weweb-assets/ww-accordion-root');
-
         function toggleThisAccordion() {
             toggleAccordion(props.content.value);
         }
