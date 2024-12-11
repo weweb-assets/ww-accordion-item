@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { inject, provide, toRef, computed, watch } from 'vue';
+import { inject, provide, computed, watch } from 'vue';
 import WwExpandTransition from './wwExpandTransition.vue';
 
 export default {
@@ -30,9 +30,9 @@ export default {
     },
     emits: ['trigger-event'],
     setup(props, { emit }) {
-        const { disabled } = toRef(() => props.content.disabled);
+        // const { disabled } = toRef(() => props.content.disabled);
 
-        const { value } = inject('weweb-assets/ww-accordion-root');
+        const { value, toggleAccordion } = inject('weweb-assets/ww-accordion-root');
         const isExpanded = computed(() => value.value === props.content.value);
 
         watch(isExpanded, val => {
@@ -44,26 +44,26 @@ export default {
             });
         });
 
-        function openAccordion() {
-            value.value = props.content.value;
+        function toggleThisAccordion() {
+            toggleAccordion(props.content.value);
         }
-        function closeAccordion() {
-            value.value = null;
-        }
-        function toggleAccordion() {
-            const newValue = value.value === props.content.value ? null : props.content.value;
-            value.value = newValue;
-        }
+
+        // function openAccordion() {
+        //     value.value = props.content.value;
+        // }
+        // function closeAccordion() {
+        //     value.value = null;
+        // }
+        // function toggleAccordion() {
+        //     const newValue = value.value === props.content.value ? null : props.content.value;
+        //     value.value = newValue;
+        // }
 
         provide('weweb-assets/ww-accordion-item', {
-            openAccordion,
-            closeAccordion,
-            toggleAccordion,
-            disabled,
-            isExpanded,
+            toggleThisAccordion,
         });
 
-        wwLib.wwElement.useRegisterElementLocalContext('ww-accordion-item', { isExpanded })
+        wwLib.wwElement.useRegisterElementLocalContext('ww-accordion-item', { isExpanded });
 
         return {
             isExpanded,
