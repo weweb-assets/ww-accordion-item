@@ -32,7 +32,13 @@ export default {
     setup(props, { emit }) {
         const { disabled } = toRef(() => props.content.disabled);
 
-        const { value } = inject('weweb-assets/ww-accordion-root');
+        const {
+            value,
+            openAccordion: parentOpenAccordion,
+            closeAccordion: parentCloseAccordion,
+            toggleAccordion: parentToggleAccordion,
+        } = inject('weweb-assets/ww-accordion-root');
+
         const isExpanded = computed(() => value.value === props.content.value);
 
         watch(isExpanded, val => {
@@ -44,12 +50,6 @@ export default {
             });
         });
 
-        const {
-            openAccordion: parentOpenAccordion,
-            closeAccordion: parentCloseAccordion,
-            toggleAccordion: parentToggleAccordion,
-        } = inject('weweb-assets/ww-accordion-root');
-
         function openAccordion() {
             parentOpenAccordion(props.content.value);
         }
@@ -57,6 +57,7 @@ export default {
             parentCloseAccordion(props.content.value);
         }
         function toggleAccordion() {
+            console.log('test');
             parentToggleAccordion(props.content.value);
         }
 
