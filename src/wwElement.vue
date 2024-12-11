@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { inject, provide, toRef, computed, watch } from 'vue';
+import { inject, provide, computed, watch } from 'vue';
 import WwExpandTransition from './wwExpandTransition.vue';
 
 export default {
@@ -30,7 +30,7 @@ export default {
     },
     emits: ['trigger-event'],
     setup(props, { emit }) {
-        const { disabled } = toRef(() => props.content.disabled);
+        const disabled = computed(() => props.content.disabled);
 
         const {
             value,
@@ -73,7 +73,6 @@ export default {
 
         return {
             isExpanded,
-            parent,
         };
     },
 };
