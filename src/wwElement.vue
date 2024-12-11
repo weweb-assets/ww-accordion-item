@@ -16,8 +16,9 @@
 </template>
 
 <script>
-import { inject, provide, computed, watch } from 'vue';
+import { provide } from 'vue';
 import WwExpandTransition from './wwExpandTransition.vue';
+import { useAccordion } from './composables/useAccordion';
 
 export default {
     components: { WwExpandTransition },
@@ -30,53 +31,22 @@ export default {
     },
     emits: ['trigger-event'],
     setup(props, { emit }) {
-        const disabled = computed(() => props.content.disabled);
-
-        const {
-            value,
-            openAccordion: parentOpenAccordion,
-            closeAccordion: parentCloseAccordion,
-            toggleAccordion: parentToggleAccordion,
-        } = inject('weweb-assets/ww-accordion-root');
-
-        const isExpanded = computed(() => {
-            return Array.isArray(value.value)
-                ? value.value.includes(props.content.value)
-                : value.value === props.content.value;
-        });
-
-        watch(isExpanded, val => {
-            emit('trigger-event', {
-                name: 'change',
-                event: {
-                    value: val,
-                },
-            });
-        });
-
-        function openAccordion() {
-            parentOpenAccordion(props.content.value);
-        }
-        function closeAccordion() {
-            parentCloseAccordion(props.content.value);
-        }
-        function toggleAccordion() {
-            console.log('test');
-            parentToggleAccordion(props.content.value);
-        }
+        const accordion = useAccordion(props, emit);
 
         provide('weweb-assets/ww-accordion-item', {
-            openAccordion,
-            closeAccordion,
-            toggleAccordion,
-            disabled,
-            isExpanded,
+            openAccordion: accordion.openAccordion,
+            closeAccordion: accordion.closeAccordion,
+            toggleAccordion: accordion.toggleAccordion,
+            disabled: accordion.disabled,
+            isExpanded: accordion.isExpanded,
         });
 
-        wwLib.wwElement.useRegisterElementLocalContext('ww-accordion-item', { isExpanded });
+        wwLib.wwElement.useRegisterElementLocalContext('ww-accordion-item', {
+            isExpanded: accordion.isExpanded,
+        });
 
         return {
-            isExpanded,
+            isExpanded: accordion.isExpanded,
         };
     },
 };
