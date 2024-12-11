@@ -39,7 +39,11 @@ export default {
             toggleAccordion: parentToggleAccordion,
         } = inject('weweb-assets/ww-accordion-root');
 
-        const isExpanded = computed(() => value.value === props.content.value);
+        const isExpanded = computed(() => {
+            return Array.isArray(value.value)
+                ? value.value.includes(props.content.value)
+                : value.value === props.content.value;
+        });
 
         watch(isExpanded, val => {
             emit('trigger-event', {
