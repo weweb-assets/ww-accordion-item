@@ -29,6 +29,7 @@ export default {
             event: {
                 value: true,
             },
+            description: "Run when the selected value changes.",
         },
     ],
     actions: [],
